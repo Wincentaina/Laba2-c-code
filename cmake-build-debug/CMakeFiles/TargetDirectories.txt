@@ -1,0 +1,3 @@
+/Users/wincentaina/CLionProjects/sem3/laba2WithGit/cmake-build-debug/CMakeFiles/laba2WithGit.dir
+/Users/wincentaina/CLionProjects/sem3/laba2WithGit/cmake-build-debug/CMakeFiles/edit_cache.dir
+/Users/wincentaina/CLionProjects/sem3/laba2WithGit/cmake-build-debug/CMakeFiles/rebuild_cache.dir
