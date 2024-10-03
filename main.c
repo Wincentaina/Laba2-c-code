@@ -98,6 +98,30 @@ Submission check_solution(UserSolution solution, Task task) {
 
 
 int main() {
-    printf("Hello, World!\n");
+    // Создание тестов
+    TestCase test1 = create_test_case("input1", "expected1");
+    TestCase test2 = create_test_case("input2", "expected2");
+    TestCase tests[] = {test1, test2};
+
+    // Создание набора тестов
+    TestSuite suite = create_test_suite(tests, 2);
+
+    // Создание задачи
+    Task task = {"Example Task", suite};
+
+    // Решение пользователя
+    UserSolution solution = {"user_solution_code"};
+
+    // Запуск проверки решения
+    Submission submission = check_solution(solution, task);
+
+    // Вывод результатов
+    printf("Total tests passed: %d out of %d\n", submission.total_passed, suite.test_count);
+    for (int i = 0; i < suite.test_count; i++) {
+        printf("Test %d: %s\n", i + 1, submission.results[i].is_passed ? "Passed" : "Failed");
+    }
+
+    // Освобождение памяти
+    free(submission.results);
     return 0;
 }
