@@ -1,0 +1,7 @@
+.gitignore.swp
+cmake-build-debug/*
+cmake-build-debug
+cmake-build-debug/.ninja_log
+cmake-build-debug/laba2WithGit
+cmake-build-debug/Testing/Temporary/LastTest.log
+cmake-build-debug/.ninja_deps
