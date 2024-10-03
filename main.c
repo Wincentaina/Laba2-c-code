@@ -1,4 +1,6 @@
 #include <stdio.h>
+#include <string.h>
+#include <stdlib.h>
 
 typedef struct {
     char input[256];    // Входные данные для теста
@@ -39,6 +41,61 @@ typedef struct {
     Task task;                    // Задача, которую нужно проверить
     Submission submission;        // Отправка, содержащая решение
 } Checker;
+
+TestCase create_test_case(char* input, char* expected) {
+    TestCase test;
+    strcpy(test.input, input);
+    strcpy(test.expected, expected);
+    return test;
+}
+
+TestSuite create_test_suite(TestCase* tests, int test_count) {
+    TestSuite suite;
+    suite.tests = tests;
+    suite.test_count = test_count;
+    return suite;
+}
+
+ExecutionResult run_test_case(UserSolution solution, TestCase test) {
+    ExecutionResult result;
+    // Симуляция выполнения решения
+    // В реальном проекте этот код будет выполнять решение пользователя
+    strcpy(result.actual_output, test.input);  // Симулируем выполнение
+    result.is_passed = (strcmp(result.actual_output, test.expected) == 0);
+    return result;
+}
+
+TestRun run_all_tests(UserSolution solution, TestSuite suite) {
+    TestRun run;
+    run.suite = suite;
+    run.results = malloc(suite.test_count * sizeof(ExecutionResult));
+
+    for (int i = 0; i < suite.test_count; i++) {
+        run.results[i] = run_test_case(solution, suite.tests[i]);
+    }
+
+    return run;
+}
+
+Submission check_solution(UserSolution solution, Task task) {
+    Submission submission;
+    submission.solution = solution;
+    submission.results = malloc(task.test_suite.test_count * sizeof(ExecutionResult));
+
+    int total_passed = 0;
+
+    for (int i = 0; i < task.test_suite.test_count; i++) {
+        submission.results[i] = run_test_case(solution, task.test_suite.tests[i]);
+        if (submission.results[i].is_passed) {
+            total_passed++;
+        }
+    }
+
+    submission.total_passed = total_passed;
+    return submission;
+}
+
+
 
 int main() {
     printf("Hello, World!\n");
